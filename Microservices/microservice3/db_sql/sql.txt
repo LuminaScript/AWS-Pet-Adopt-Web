@@ -1,0 +1,19 @@
+CREATE TABLE if not exists Pets (
+    PetID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255),
+    Owner VARCHAR(255),
+	OwnerID INT,
+    Category VARCHAR(255),
+    Age INT,
+    Color VARCHAR(255),
+    Breeds VARCHAR(255),
+    Gender VARCHAR(255),
+    Height FLOAT,
+    Length FLOAT,
+    Weight FLOAT,
+    Picture VARCHAR(3071),
+    Conditions VARCHAR(255)
+);
+
+INSERT INTO Pets (PetID, Name, Owner, OwnerID, Category, Age, Color, Breeds, Gender, Height, Length, Weight, Picture, Conditions)
+VALUES (1,"Jimmy", "JimmyOwner", 0, 'dog',1,"black","test","m",10,10,10,"test_url","test_condition");
