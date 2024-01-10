@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        max-width: 600px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        background-color: grey;
+        color: white;
+        cursor: not-allowed;
+    }
+</style>
+<html lang="en">
+<head>
+    <!-- ** Basic Page Needs ** -->
+    <meta charset="utf-8"/>
+    <title>AdoptPal | Pet Adoption</title>
+
+    <!-- ** Mobile Specific Metas ** -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="Agency HTML Template"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <!-- favicon -->
+    <link href="images/favicon.png" rel="shortcut icon"/>
+
+    <!-- 
+  Essential stylesheets
+  =====================================-->
+    <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="plugins/bootstrap/bootstrap-slider.css" rel="stylesheet"/>
+    <link
+            href="plugins/font-awesome/css/font-awesome.min.css"
+            rel="stylesheet"
+    />
+    <link href="plugins/slick/slick.css" rel="stylesheet"/>
+    <link href="plugins/slick/slick-theme.css" rel="stylesheet"/>
+    <link
+            href="plugins/jquery-nice-select/css/nice-select.css"
+            rel="stylesheet"
+    />
+
+    <link href="css/style.css" rel="stylesheet"/>
+    <script type="text/javascript" src="static/script/jquery.min.js"></script>
+    <script type="text/javascript" src="static/script/aws-sdk-2.487.0.min.js"></script>
+    <script type="text/javascript" src="static/script/aws-cognito-sdk.min.js"></script>
+    <script type="text/javascript" src="static/script/amazon-cognito-identity.min.js"></script>
+
+</head>
+
+<body class="body-wrapper">
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light navigation">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/6156logo2.png" alt=""/>
+                    </a>
+                    <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto main-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide @@dashboard">
+                                <a
+                                        class="nav-link dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        href="#!"
+                                >Dashboard<span><i class="fa fa-angle-down"></i></span>
+                                </a>
+
+                                <!-- Dropdown list -->
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a
+                                                class="dropdown-item @@dashboardMyAds"
+                                                href="dashboard-owner.html"
+                                        >Pet Owner Dashboard</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                                class="dropdown-item @@dashboardFavouriteAds"
+                                                href="dashboard-adopter.html"
+                                        >Adopter Dashboard</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto mt-10">
+                            <li class="nav-item">
+                                <a class="nav-link login-button" href="login.html">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="login py-5 border-top-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border border">
+                    <h3 class="bg-gray p-4">Register Now</h3>
+                    <form id="registrationForm">
+                        <fieldset class="p-4">
+                            <input id="firstName" class="form-control mb-3" type="text" placeholder="First Name*"
+                                   required>
+                            <input id="lastName" class="form-control mb-3" type="text" placeholder="Last Name*"
+                                   required>
+                            <input id="email" class="form-control mb-3" type="email" placeholder="Email*" required>
+                            <input id="password" class="form-control mb-3" type="password" placeholder="Password*"
+                                   required>
+                            <!-- ... [Rest of the form content] ... -->
+                            <div class="loggedin-forgot d-inline-flex my-3">
+                                <input type="checkbox" id="registering" class="mt-1"/>
+                                <label for="registering" class="px-2">
+                                    By registering, you accept our
+                                    <a
+                                            class="text-primary font-weight-bold"
+                                            href="terms-condition.html"
+                                    >Terms & Conditions</a
+                                    ></label>
+                            </div>
+                            <button type="submit" id="registerButton" class="btn btn-primary font-weight-bold mt-3" disabled>
+                                Register and Get Verification Node
+                            </button>
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Enter Verification Code</h3>
+            <input id="verification_code" class="form-control mb-3" type="text" placeholder="Verification Code"
+                   required>
+            <button id="verify">Verify</button>
+        </div>
+    </div>
+</section>
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer-bottom">
+    <!-- To Top -->
+    <div class="scroll-top-to">
+        <i class="fa fa-angle-up"></i>
+    </div>
+</footer>
+
+<!--
+Essential Scripts
+=====================================-->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/popper.min.js"></script>
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/bootstrap-slider.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/slick/slick.min.js"></script>
+<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+    // AWS Cognito Configuration and User Pool Initialization
+    var userPoolId = 'us-east-1_nOcD6ORJk';
+    var clientId = '7t7rk82dt6mfabpv377js39kk1';
+    var region = 'us-east-1';
+
+    var cognitoUser;
+    var idToken;
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool({
+        UserPoolId: userPoolId,
+        ClientId: clientId
+    });
+
+    document.getElementById('registering').addEventListener('change', function (event) {
+        var registerButton = document.getElementById('registerButton');
+        registerButton.disabled = !this.checked;
+    });
+
+    // Event Listener for Registration Form Submission
+    document.getElementById('registrationForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var userData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        // AWS Cognito signup logic
+        signup(userData.email, userData.password, userData.firstName, userData.lastName);
+    });
+
+    // Modal Interaction Logic
+    var modal = document.getElementById("verificationModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Function for User Signup
+    function signup(username, password, firstName, lastName) {
+        var attributeList = [];
+
+        var dataEmail = {
+            Name: 'email',
+            Value: username
+        };
+        var dataGivenName = {
+            Name: 'given_name',
+            Value: firstName
+        };
+        var dataFamilyName = {
+            Name: 'family_name',
+            Value: lastName
+        };
+
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        var attributeGivenName = new AmazonCognitoIdentity.CognitoUserAttribute(dataGivenName);
+        var attributeFamilyName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFamilyName);
+
+        attributeList.push(attributeEmail);
+        attributeList.push(attributeGivenName);
+        attributeList.push(attributeFamilyName);
+
+        userPool.signUp(username, password, attributeList, null, function (err, result) {
+            if (err) {
+                console.log("Signup failed, error: ");
+                console.log(err.message);
+                if (err.code === 'UsernameExistsException') {
+                    alert("An account with this email already exists. Redirecting to login.");
+                    window.location.href = 'login.html';
+                }
+
+            } else {
+                cognitoUser = result.user;
+                console.log('Registration Successful!');
+                console.log('Username is: ' + cognitoUser.getUsername());
+                console.log('Please enter the verification code sent to your Email.');
+                modal.style.display = "block";
+            }
+        });
+    }
+
+    // Event Listener for Verification Button
+    document.getElementById("verify").addEventListener("click", function () {
+        verify();
+    });
+
+    // Function for User Verification
+    function verify() {
+        var verificationCode = document.getElementById("verification_code").value;
+
+        cognitoUser.confirmRegistration(verificationCode, true, function(err, result) {
+            if (err) {
+                console.log("Verification failed, error: ");
+                console.log(err.message || JSON.stringify(err));
+            } else {
+                console.log("Verification successful!");
+                console.log(result);
+                modal.style.display = "none";
+                // Add any redirection or additional logic here for successful verification
+                window.location.href = "dashboard-owner.html";
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
