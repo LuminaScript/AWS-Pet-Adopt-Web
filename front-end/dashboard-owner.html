@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<style>
+	.header-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 15px;
+	}
+
+	.header-container .widget-header {
+		margin: 0;
+	}
+
+	.button-container {
+		margin: 0;
+	}
+
+
+	.button-container button {
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.button-container #createPetBtn{
+		margin-bottom: 15px;
+		padding: 10px 15px;
+		font-size: 14px;
+	}
+
+	.popup {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+	}
+
+	.popup-content {
+		background-color: #fefefe;
+		margin: 15% auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%;
+	}
+
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	#savePetName {
+		background-color: #007bff;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+
+	#savePetName:hover {
+		background-color: #0056b3;
+	}
+
+	#cancelPetName {
+		background-color: #dc3545;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		cursor: pointer;
+	}
+
+	#cancelPetName:hover {
+		background-color: #c82333;
+	}
+
+
+	.createPanel {
+		display: none;
+		position: fixed;
+		z-index: 1;
+	}
+	.createPanel-content {
+		background-color: #fefefe;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 30%;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	}
+
+	.createPanel-content form {
+		margin-top: 20px;
+	}
+
+	.createPanel-content form input,
+	.createPanel-content form select {
+		width: 100%;
+		padding: 10px;
+		margin: 10px 0;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+	}
+
+	.createPanel-content form button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.createPanel-content form button:hover {
+		background-color: #45a049;
+	}
+
+	.createPanel-content form .form-footer {
+		display: flex;
+		justify-content: flex-end;
+		gap: 10px;
+	}
+
+	.createPanel-content form .form-footer select,
+	.createPanel-content form .form-footer button {
+		flex: none;
+	}
+
+
+</style>
+<head>
+
+  <!-- ** Basic Page Needs ** -->
+  <meta charset="utf-8">
+	<title>AdoptPal | Pet Adoption</title>
+
+  <!-- ** Mobile Specific Metas ** -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Agency HTML Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <!-- favicon -->
+	<link href="images/favicon.png" rel="shortcut icon">
+
+  <!-- 
+  Essential stylesheets
+  =====================================-->
+  <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="plugins/bootstrap/bootstrap-slider.css" rel="stylesheet">
+  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="plugins/slick/slick.css" rel="stylesheet">
+  <link href="plugins/slick/slick-theme.css" rel="stylesheet">
+  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="body-wrapper">
+
+<header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-expand-lg navbar-light navigation">
+					<a class="navbar-brand" href="index.html">
+						<img src="images/6156logo2.png" alt="">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto main-nav ">
+							<li class="nav-item active">
+								<a class="nav-link" href="index.html">Home</a>
+							</li>
+							<li class="nav-item dropdown dropdown-slide @@dashboard">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!">Dashboard<span><i class="fa fa-angle-down"></i></span>
+								</a>
+
+								<!-- Dropdown list -->
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item @@dashboardMyAds" href="dashboard-owner.html">Pet Owner Dashboard</a></li>
+									<li><a class="dropdown-item @@dashboardFavouriteAds" href="dashboard-adopter.html">Adopter Dashboard</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>
+<!--==================================
+=            User Profile            =
+===================================-->
+<section class="dashboard section">
+	<!-- Container Start -->
+	<div class="container">
+		<!-- Row Start -->
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user-dashboard-profile">
+						<!-- User Image -->
+						<div class="profile-thumb">
+							<img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">Random Name</h5>
+						<a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+					</div>
+					<!-- Dashboard Links -->
+					<div class="widget user-dashboard-menu">
+						<ul>
+							<li class="active">
+								<a href="dashboard-owner.html"><i class="fa fa-user"></i> My Pets</a></li>
+							<li>
+								<a href="dashboard-adopter.html"><i class="fa fa-user"></i> Adopter Panel </a>
+							</li>
+							</li>
+							<li>
+								<a href="index.html"><i class="fa fa-cog"></i> Logout</a>
+							</li>
+							<li>
+								<a href="#!" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete Account</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- delete-account modal -->
+					<!-- delete account popup modal start-->
+<!-- Modal -->
+<div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
+        <h6 class="py-2">Are you sure you want to delete your account?</h6>
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        <textarea class="form-control" name="message" id="" cols="40" rows="4" class="w-100 rounded"></textarea>
+      </div>
+      <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-center">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete account popup modal end-->
+					<!-- delete-account modal -->
+
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+					<div class="header-container">
+						<h3 class="widget-header">My Pets</h3>
+						<div class="button-container">
+							<button id="createPetBtn">Create Pet</button>
+						</div>
+					</div>
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+								<th>Image</th>
+								<th>Pet Name</th>
+								<th class="text-center">Category</th>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						<!--
+							<tr>
+								<td class="product-thumb">
+									<img width="80px" height="auto" src="images/products/dog1.jpeg" alt="image description"></td>
+								<td class="product-details">
+									<h3 class="title">Andy</h3>
+									<span class="add-id"><strong>Breed:</strong>Golden Retriever </span>
+									<span><strong>Birthday: </strong><time>Jun 27, 2022</time> </span>
+									<span class="status active"><strong>Status</strong>Not Adopted</span>
+									<span class="location"><strong>Location</strong>New York City, New York</span>
+								</td>
+								<td class="product-category"><span class="categories">Dog</span></td>
+								<td class="action" data-title="Action">
+									<div class="">
+										<ul class="list-inline justify-content-center">
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="View" class="view" href="">
+													<i class="fa fa-eye"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Edit Pets Name" class="edit" href="#" data-pet-id="1" data-pet-name="Andy">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="#" data-pet-id="1">
+													<i class="fa fa-trash"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+
+								<td class="product-thumb">
+									<img width="80px" height="auto" src="images/products/dog2.jpeg" alt="image description"></td>
+								<td class="product-details">
+									<h3 class="title">Angela</h3>
+									<span class="add-id"><strong>Breed:</strong>Golden Retriever </span>
+									<span><strong>Birthday: </strong><time>Jun 27, 2022</time> </span>
+									<span class="status disabled"><strong>Status</strong>Adopted</span>
+									<span class="location"><strong>Location</strong>New York City, New York</span>
+								</td>
+								<td class="product-category"><span class="categories">Dog</span></td>
+								<td class="action" data-title="Action">
+									<div class="">
+										<ul class="list-inline justify-content-center">
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="View" class="view" href="">
+													<i class="fa fa-eye"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Edit Pets Name" class="edit" href="#" data-pet-id="2" data-pet-name="Angela">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="#" data-pet-id="2">
+													<i class="fa fa-trash"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+
+								<td class="product-thumb">
+									<img width="80px" height="auto" src="images/products/dog3.jpeg" alt="image description"></td>
+								<td class="product-details">
+									<h3 class="title">Tom</h3>
+									<span class="add-id"><strong>Breed:</strong>Bernese Mountain Dog </span>
+									<span><strong>Birthday: </strong><time>August 27, 2022</time> </span>
+									<span class="status active"><strong>Status</strong>Not Adopted</span>
+									<span class="location"><strong>Location</strong>New York City, New York</span>
+								</td>
+								<td class="product-category"><span class="categories">Dog</span></td>
+								<td class="action" data-title="Action">
+									<div class="">
+										<ul class="list-inline justify-content-center">
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="View" class="view" href="">
+													<i class="fa fa-eye"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Edit Pets Name" class="edit" href="#" data-pet-id="3" data-pet-name="Tom">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="#" data-pet-id="3">
+													<i class="fa fa-trash"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+
+								<td class="product-thumb">
+									<img width="80px" height="auto" src="images/products/cat1.jpeg" alt="image description"></td>
+								<td class="product-details">
+									<h3 class="title">Mimi</h3>
+									<span class="add-id"><strong>Breed:</strong>Ragdoll Cat </span>
+									<span><strong>Birthday: </strong><time>Dec 19, 2022</time> </span>
+									<span class="status active"><strong>Status</strong>Not Adopted</span>
+									<span class="location"><strong>Location</strong>New York City, New York</span>
+								</td>
+								<td class="product-category"><span class="categories">Cat</span></td>
+								<td class="action" data-title="Action">
+									<div class="">
+										<ul class="list-inline justify-content-center">
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="View" class="view" href="">
+													<i class="fa fa-eye"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Edit Pets Name" class="edit" href="#" data-pet-id="4" data-pet-name="Mimi">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</li>
+											<li class="list-inline-item">
+												<a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="#" data-pet-id="4">
+													<i class="fa fa-trash"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							-->
+						</tbody>
+					</table>
+
+				</div>
+
+				<!-- pagination -->
+				<div class="pagination justify-content-center" id="petPagination">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+						</ul>
+					</nav>
+				</div>
+				<!-- End pagination -->
+
+			</div>
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container End -->
+	<!-- Edit Name Modal -->
+	<div id="editNameModal" class="popup">
+		<div class="popup-content">
+			<span class="close">&times;</span>
+			<h2>Edit Pet Name</h2>
+			<input type="text" id="newPetName" placeholder="Enter new pet name">
+			<button id="savePetName">Save</button>
+			<button id="cancelPetName">Cancel</button>
+		</div>
+	</div>
+
+	<div id="addPetModal" class="createPanel">
+		<div class="createPanel-content">
+			<span class="close">&times;</span>
+			<h2>Add New Pet</h2>
+			<form id="addPetForm">
+				<input type="text" id="petName" placeholder="Pet Name" required>
+				<input type="text" id="petBreed" placeholder="Breed" required>
+				<input type="date" id="petBirthday" required>
+				<input type="text" id="petLocation" placeholder="Location" required>
+				<div class="form-footer">
+					<select id="petCategory">
+						<option value="Dog">Dog</option>
+						<option value="Cat">Cat</option>
+					</select>
+					<button type="submit">Add Pet</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+<!--============================
+=            Footer            =
+=============================-->
+
+<!-- Footer Bottom -->
+<footer class="footer-bottom">
+  <!-- To Top -->
+  <div class="scroll-top-to">
+    <i class="fa fa-angle-up"></i>
+  </div>
+</footer>
+
+<!-- 
+Essential Scripts
+=====================================-->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/popper.min.js"></script>
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/bootstrap-slider.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/slick/slick.min.js"></script>
+<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="js/script.js"></script>
+<script>
+	async function GetAllPet() {
+		//GET request
+		const url = new URL(
+				"https://b8gke3dl56.execute-api.us-east-1.amazonaws.com/test/Pets"
+		);
+		const requestOptions = {
+			method: "GET",
+		};
+		try {
+			let response = await fetch(url, requestOptions);
+			let resultText = await response.text();
+			console.log(resultText);
+
+			let result = JSON.parse(resultText);
+			console.log("result: ");
+			console.log(result);
+
+			if (response.ok) {
+				// If the request is successful, display the result in an alert
+				// alert("Lambda returns: " + resultText); // Include your result text here
+				displayPets(resultText);
+				paginatePets();
+				showCurrentPage();
+			} else {
+				// If the request fails, display an error message
+				alert("Internal Server Error :(");
+			}
+		} catch (error) {
+			console.log("error", error);
+		}
+
+		console.log("Search Request Sent");
+	}
+
+	async function createPet(petName, petBreed, petBirthday, petLocation, petCategory) {
+
+		const url = `https://b8gke3dl56.execute-api.us-east-1.amazonaws.com/test/create?petName=${petName}&petBreed=${petBreed}&petCategory=${petCategory}`;
+
+		const requestOptions = {
+			method: "POST",
+		};
+
+		try {
+			let response = await fetch(url, requestOptions);
+			let resultText = await response.text();
+			console.log(resultText);
+
+			if (response.ok) {
+				alert("Pet successfully added: " + resultText); // Modify as needed
+				return JSON.parse(resultText); // Assuming the response includes the pet's data
+			} else {
+				alert("Internal Server Error :(");
+			}
+		} catch (error) {
+			console.error("Error:", error);
+			alert("Error creating pet: " + error.message);
+		}
+	}
+
+
+	async function deletePetById(id) {
+		//GET request
+		const url = `https://b8gke3dl56.execute-api.us-east-1.amazonaws.com/test/delete/${id}`;
+
+		const requestOptions = {
+			method: "DELETE",
+		};
+		try {
+			let response = await fetch(url, requestOptions);
+			let resultText = await response.text();
+			if (!response.ok) {
+				throw new Error('Failed to delete the pet');
+			}
+			console.log(resultText);
+
+			let result = JSON.parse(resultText);
+			console.log("result: ");
+			console.log(result);
+
+			if (response.ok) {
+				// If the request is successful, display the result in an alert
+				alert("Lambda returns: " + resultText); // Include your result text here
+			} else {
+				// If the request fails, display an error message
+				alert("Internal Server Error :(");
+			}
+		} catch (error) {
+			console.error("error", error);
+		}
+
+		console.log("Search Request Sent");
+	}
+
+	async function UpdatePetName(newname,id) {
+		//PUT request
+		const url = `https://b8gke3dl56.execute-api.us-east-1.amazonaws.com/test/updatepetname?newname=${newname}&id=${id}`;
+
+		const requestOptions = {
+			method: "PUT",
+		};
+		try {
+			let response = await fetch(url, requestOptions);
+			let resultText = await response.text();
+			console.log(resultText);
+
+			let result = JSON.parse(resultText);
+			console.log("result: ");
+			console.log(result);
+
+			if (response.ok) {
+				// If the request is successful, display the result in an alert
+				alert("Lambda returns: " + resultText); // Include your result text here
+			} else {
+				// If the request fails, display an error message
+				alert("Internal Server Error :(");
+			}
+		} catch (error) {
+			console.log("error", error);
+			alert(error);
+		}
+		console.log("Search Request Sent");
+	}
+
+	window.onload = function () {
+		// GetAllPet();
+		// createPet();
+		// deletePetById(123);
+		// UpdatePetName("Samantha");
+	};
+
+	function displayPets(jsonString) {
+		const tableBody = document.querySelector('.product-dashboard-table tbody');
+		tableBody.innerHTML = '';
+		function manuallyParseJSON(jsonString) {
+			const objects = [];
+			const entries = jsonString.slice(2, -2).split("},{");
+
+			entries.forEach(entry => {
+				const obj = {};
+				const pairs = entry.split(',');
+
+				pairs.forEach(pair => {
+					const [key, value] = pair.split(':');
+					const cleanKey = key.replace(/[\{\}\"\\]/g, '').trim();
+					const cleanValue = value.replace(/[\{\}\"\\]/g, '').trim();
+
+					obj[cleanKey] = isNaN(cleanValue) ? cleanValue : Number(cleanValue);
+				});
+
+				objects.push(obj);
+			});
+
+			return objects;
+		}
+		const pets = manuallyParseJSON(jsonString);
+
+		for (const pet of pets) {
+			const row = document.createElement('tr');
+
+			const picture = pet.Picture || 'default-image-url.jpg'; // Replace with your default image URL
+			const name = pet.Name || 'N/A';
+			const breeds = pet.Breeds || 'Unknown';
+			const age = pet.Age || 'Unknown';
+			const conditions = pet.Conditions || 'Not Adopted';
+			const owner = pet.Owner || 'Unknown';
+			const category = pet.Category || 'Unknown';
+			const petID = pet.PetID || '';
+
+			row.innerHTML = `
+            <td class="product-thumb">
+
+                <img width="80px" height="auto" src="images/products/default.jpeg" alt="Image not available">
+                <!-- <img width="80px" height="auto" src="${picture}" alt="Image not available"> -->
+            </td>
+            <td class="product-details">
+                <h3 class="title">${name}</h3>
+                <span class="add-id"><strong>Breed:</strong> ${breeds}</span>
+                <span><strong>Age:</strong> ${age}</span>
+                <span class="status active"><strong>Condition:</strong> ${conditions}</span>
+                <span class="location"><strong>Owner:</strong> ${owner}</span>
+            </td>
+            <td class="product-category"><span class="categories">${category}</span></td>
+            <td class="action" data-title="Action">
+                <ul class="list-inline justify-content-center">
+                    <li class="list-inline-item">
+                        <a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="#" data-pet-id="${petID}">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="#" data-pet-id="${petID}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        `;
+
+			tableBody.appendChild(row);
+		}
+	}
+
+
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var modal = document.getElementById("editNameModal");
+		var span = document.getElementsByClassName("close")[0];
+
+		document.querySelector('.product-dashboard-table').addEventListener('click', function(event) {
+			if (event.target.closest('.edit')) {
+				event.preventDefault();
+				modal.style.display = "block";
+
+				let button = event.target.closest('.edit');
+				let petId = button.getAttribute('data-pet-id');
+				let petNameElement = button.closest('tr').querySelector('.title');
+
+				document.getElementById('savePetName').onclick = async function() {
+					let newPetName = document.getElementById('newPetName').value;
+					if (newPetName) {
+						try {
+							UpdatePetName(newPetName, petId);
+							petNameElement.textContent = newPetName;
+						} catch (error) {
+							console.error("Failed to update pet name: ", error);
+							alert("Failed to update pet name.");
+						}
+						modal.style.display = "none";
+					}
+				};
+			}
+		});
+
+		span.onclick = function() {
+			modal.style.display = "none";
+		};
+
+		window.onclick = function(event) {
+			if (event.target === modal) {
+				modal.style.display = "none";
+			}
+		};
+
+		document.getElementById('cancelPetName').onclick = function() {
+			modal.style.display = "none";
+		};
+	});
+
+	document.addEventListener('DOMContentLoaded', function () {
+		document.querySelector('.product-dashboard-table').addEventListener('click', function(event) {
+			if (event.target.closest('.delete')) {
+				event.preventDefault();
+
+				let button = event.target.closest('.delete');
+				let petId = button.getAttribute('data-pet-id');
+
+				if (confirm("Are you sure you want to delete this pet?")) {
+					deletePetById(petId).then(() => {
+						document.querySelector(`[data-pet-id="${petId}"]`).closest('tr').remove();
+						paginatePets();
+						showCurrentPage();
+					}).catch(error => {
+						console.error("Failed to delete pet: ", error);
+						alert("Failed to delete pet.");
+					});
+				}
+			}
+		});
+	});
+
+	function generatePetId() {
+		return new Date().getTime().toString();
+	}
+
+	function addPetToTable(pet) {
+		const table = document.querySelector('.product-dashboard-table tbody');
+		const row = table.insertRow();
+		row.innerHTML = `
+        <td class="product-thumb"><img src="${pet.image}" alt="Pet Image" width="80px" height="auto"></td>
+        <td class="product-details">
+            <h3 class="title">${pet.name}</h3>
+            <span class="add-id"><strong>Breed:</strong> ${pet.breed}</span>
+            <span><strong>Birthday: </strong><time>${pet.birthday}</time></span>
+            <span class="status active"><strong>Status:</strong> ${pet.status}</span>
+            <span class="location"><strong>Location:</strong> ${pet.location}</span>
+        </td>
+        <td class="product-category"><span class="categories">${pet.category}</span></td>
+        <td class="action" data-title="Action">
+            <a href="#" class="view" data-pet-id="${pet.id}"><i class="fa fa-eye"></i></a>
+            <a href="#" class="edit" data-pet-id="${pet.id}"><i class="fa fa-pencil"></i></a>
+            <a href="#" class="delete" data-pet-id="${pet.id}"><i class="fa fa-trash"></i></a>
+        </td>
+    `;
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var addPetModal = document.getElementById("addPetModal");
+		var closeBtn = addPetModal.getElementsByClassName("close")[0];
+		var createPetBtn = document.getElementById("createPetBtn");
+
+		createPetBtn.addEventListener('click', function() {
+			addPetModal.style.display = "block";
+		});
+
+		closeBtn.onclick = function() {
+			addPetModal.style.display = "none";
+		};
+
+		window.onclick = function(event) {
+			if (event.target === addPetModal) {
+				addPetModal.style.display = "none";
+			}
+		};
+
+		document.getElementById('addPetForm').addEventListener('submit', async function(event) {
+			event.preventDefault();
+
+			let petName = document.getElementById('petName').value;
+			let petBreed = document.getElementById('petBreed').value;
+			let petBirthday = document.getElementById('petBirthday').value;
+			let petLocation = document.getElementById('petLocation').value;
+			let petCategory = document.getElementById('petCategory').value;
+
+			try {
+				let newPet = await createPet(petName, petBreed, petBirthday, petLocation, petCategory);
+
+				let petData = {
+					id: generatePetId(),
+					name: petName,
+					breed: petBreed,
+					birthday: petBirthday,
+					location: petLocation,
+					category: petCategory,
+					status: 'Not Adopted',
+					image: 'images/products/default.jpeg'
+				};
+
+				addPetToTable(petData);
+				paginatePets();
+				showCurrentPage();
+
+				addPetModal.style.display = "none";
+
+				const totalPets = document.querySelectorAll('.product-dashboard-table tbody tr').length;
+				if (totalPets > itemsPerPage * currentPage) {
+					currentPage = Math.ceil(totalPets / itemsPerPage);
+					paginatePets();
+				}
+				showCurrentPage();
+			} catch (error) {
+				alert("Failed to create pet: " + error.message);
+			}
+		});
+	});
+
+	let currentPage = 1;
+	const itemsPerPage = 5;
+
+	function paginatePets() {
+		const totalPets = document.querySelectorAll('.product-dashboard-table tbody tr').length;
+		const totalPages = Math.ceil(totalPets / itemsPerPage);
+		const paginationList = document.querySelector('#petPagination .pagination');
+		paginationList.innerHTML = '';
+
+		for (let i = 1; i <= totalPages; i++) {
+			const pageItem = document.createElement('li');
+			pageItem.className = 'page-item ' + (i === currentPage ? 'active' : '');
+			const pageLink = document.createElement('a');
+			pageLink.className = 'page-link';
+			pageLink.href = '#';
+			pageLink.innerText = i;
+			pageLink.addEventListener('click', function(e) {
+				e.preventDefault();
+				currentPage = i;
+				showCurrentPage();
+			});
+			pageItem.appendChild(pageLink);
+			paginationList.appendChild(pageItem);
+		}
+	}
+
+	function showCurrentPage() {
+		const rows = document.querySelectorAll('.product-dashboard-table tbody tr');
+		rows.forEach((row, index) => {
+			row.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? '' : 'none';
+		});
+
+		document.querySelectorAll('#petPagination .pagination li').forEach((item, index) => {
+			item.classList.toggle('active', index + 1 === currentPage);
+		});
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		GetAllPet();
+		paginatePets();
+		showCurrentPage();
+	});
+</script>
+</body>
+
+</html>

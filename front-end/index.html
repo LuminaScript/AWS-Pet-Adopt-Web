@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- ** Basic Page Needs ** -->
+    <meta charset="utf-8" />
+    <title>AdoptPal | Pet Adoption</title>
+
+    <!-- ** Mobile Specific Metas ** -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Agency HTML Template" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+
+    <!-- theme meta -->
+    <meta name="theme-name" content="classimax" />
+
+    <!-- favicon -->
+    <link href="images/favicon.png" rel="shortcut icon" />
+
+    <!-- 
+  Essential stylesheets
+  =====================================-->
+    <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="plugins/bootstrap/bootstrap-slider.css" rel="stylesheet" />
+    <link
+      href="plugins/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="plugins/slick/slick.css" rel="stylesheet" />
+    <link href="plugins/slick/slick-theme.css" rel="stylesheet" />
+    <link
+      href="plugins/jquery-nice-select/css/nice-select.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/style.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="lib/axios/dist/axios.standalone.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/CryptoJS/rollups/hmac-sha256.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/CryptoJS/rollups/sha256.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/CryptoJS/components/hmac.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/CryptoJS/components/enc-base64.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/url-template/url-template.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/apiGatewayCore/sigV4Client.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/apiGatewayCore/apiGatewayClient.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="lib/apiGatewayCore/simpleHttpClient.js"
+    ></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+    <script>
+      var apigClient = apigClientFactory.newClient({});
+    </script>
+
+  </head>
+
+  <body class="body-wrapper">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light navigation">
+              <a class="navbar-brand" href="index.html">
+                <img src="images/6156logo2.png" alt="" />
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto main-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item dropdown dropdown-slide @@dashboard">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="#!"
+                      >Dashboard<span><i class="fa fa-angle-down"></i></span>
+                    </a>
+
+                    <!-- Dropdown list -->
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a
+                          class="dropdown-item @@dashboardMyAds"
+                          href="dashboard-owner.html"
+                          >Pet Owner Dashboard</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item @@dashboardFavouriteAds"
+                          href="dashboard-adopter.html"
+                          >Adopter Dashboard</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mt-10">
+                  <li class="nav-item">
+                    <a class="nav-link login-button" href="login.html">Login</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!--===============================
+=            Hero Area            =
+================================-->
+
+    <section class="hero-area bg-1 text-center overly">
+      <!-- Container Start -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Header Contetnt -->
+            <div class="content-block">
+              <h1>Adopt Not Buy</h1>
+              <p>Adopt a pet near you and find your life buddy</p>
+            </div>
+            <!-- Advance Search -->
+            <div class="advance-search">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-lg-12 col-md-12 align-content-center">
+                    <form>
+                      <div class="form-row">
+                        <div class="form-group col-xl-4 col-lg-3 col-md-6">
+                          <input
+                            type="text"
+                            class="form-control my-2 my-lg-1"
+                            id="inputtext4"
+                            placeholder="What are you looking for"
+                          />
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                          <select class="w-100 form-control mt-lg-1 mt-md-2">
+                            <option>Category</option>
+                            <option value="1">Top rated</option>
+                            <option value="2">Lowest Price</option>
+                            <option value="4">Highest Price</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                          <input
+                            type="text"
+                            class="form-control my-2 my-lg-1"
+                            id="inputLocation4"
+                            placeholder="Location"
+                          />
+                        </div>
+                        <div
+                          class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center"
+                        >
+                          <button
+                            type="submit"
+                            class="btn btn-primary active w-100"
+                          >
+                            Search Now
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Container End -->
+    </section>
+
+    <!--===========================================
+=            Popular deals section            =
+============================================-->
+
+    <section class="popular-deals section bg-gray">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-title">
+              <h2>Adoption Opportunity</h2>
+              <p>Find your life buddy in one click</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- offer 01 -->
+          <div class="col-lg-12">
+            <div class="trending-ads-slide">
+              <div class="col-sm-12 col-lg-4">
+                <!-- product card -->
+                <div class="product-item bg-light">
+                  <div class="card">
+                    <div class="thumb-content">
+                      <!-- <div class="price">$200</div> -->
+                      <a href="single.html">
+                        <img
+                          class="card-img-top img-fluid"
+                          src="images/products/dog1.jpeg"
+                          alt="Card image cap"
+                        />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="single.html">Dog 1</a>
+                      </h4>
+                      <ul class="list-inline product-meta">
+                        <li class="list-inline-item">
+                          <a href="single.html"
+                            ><i class="fa fa-folder-open-o"></i>Dogs</a
+                          >
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="pets.html"
+                            ><i class="fa fa-calendar"></i>12/26/2022</a
+                          >
+                        </li>
+                      </ul>
+                      <p class="card-text">Introduction here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                <!-- product card -->
+                <div class="product-item bg-light">
+                  <div class="card">
+                    <div class="thumb-content">
+                      <!-- <div class="price">$200</div> -->
+                      <a href="single.html">
+                        <img
+                          class="card-img-top img-fluid"
+                          src="images/products/dog2.jpeg"
+                          alt="Card image cap"
+                        />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="single.html">Dog 2</a>
+                      </h4>
+                      <ul class="list-inline product-meta">
+                        <li class="list-inline-item">
+                          <a href="single.html"
+                            ><i class="fa fa-folder-open-o"></i>Dogs</a
+                          >
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="pets.html"
+                            ><i class="fa fa-calendar"></i>12/26/2022</a
+                          >
+                        </li>
+                      </ul>
+                      <p class="card-text">Introduction here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                <!-- product card -->
+                <div class="product-item bg-light">
+                  <div class="card">
+                    <div class="thumb-content">
+                      <!-- <div class="price">$200</div> -->
+                      <a href="single.html">
+                        <img
+                          class="card-img-top img-fluid"
+                          src="images/products/dog3.jpeg"
+                          alt="Card image cap"
+                        />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="single.html">Dog 3</a>
+                      </h4>
+                      <ul class="list-inline product-meta">
+                        <li class="list-inline-item">
+                          <a href="single.html"
+                            ><i class="fa fa-folder-open-o"></i>Dogs</a
+                          >
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="pets.html"
+                            ><i class="fa fa-calendar"></i>12/26/2022</a
+                          >
+                        </li>
+                      </ul>
+                      <p class="card-text">Introduction here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                <!-- product card -->
+                <div class="product-item bg-light">
+                  <div class="card">
+                    <div class="thumb-content">
+                      <!-- <div class="price">$200</div> -->
+                      <a href="single.html">
+                        <img
+                          class="card-img-top img-fluid"
+                          src="images/products/cat1.jpeg"
+                          alt="Card image cap"
+                        />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="single.html">Cat 1</a>
+                      </h4>
+                      <ul class="list-inline product-meta">
+                        <li class="list-inline-item">
+                          <a href="single.html"
+                            ><i class="fa fa-folder-open-o"></i>Cats</a
+                          >
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="pets.html"
+                            ><i class="fa fa-calendar"></i>12/26/2022</a
+                          >
+                        </li>
+                      </ul>
+                      <p class="card-text">Introduction here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Bottom -->
+    <footer class="footer-bottom">
+      <!-- To Top -->
+      <div class="scroll-top-to">
+        <i class="fa fa-angle-up"></i>
+      </div>
+    </footer>
+
+    <!-- 
+Essential Scripts
+=====================================-->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/bootstrap/popper.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap-slider.js"></script>
+    <script src="plugins/tether/js/tether.min.js"></script>
+    <script src="plugins/raty/jquery.raty-fa.js"></script>
+    <script src="plugins/slick/slick.min.js"></script>
+    <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
